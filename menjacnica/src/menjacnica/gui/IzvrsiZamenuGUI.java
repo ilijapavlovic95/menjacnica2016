@@ -242,7 +242,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private void izvrsiZamenu(){
 		try{
 			double konacniIznos = 
-					glavniProzor.sistem.izvrsiTransakciju(valuta,
+					GUIKontroler.izvrsiTransakciju(valuta,
 							rdbtnProdaja.isSelected(), 
 							Double.parseDouble(textFieldIznos.getText()));
 		
