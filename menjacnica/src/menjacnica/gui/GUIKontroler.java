@@ -86,19 +86,19 @@ public class GUIKontroler {
 	
 
 	public static void prikaziDodajKursGUI() {
-		DodajKursGUI prozor = new DodajKursGUI(glavniProzor);
+		DodajKursGUI prozor = new DodajKursGUI();
 		prozor.setLocationRelativeTo(glavniProzor);
 		prozor.setVisible(true);
 	}
 
 	public static void prikaziObrisiKursGUI(Valuta izabranaValuta) {
-		ObrisiKursGUI prozor = new ObrisiKursGUI(glavniProzor, izabranaValuta);
+		ObrisiKursGUI prozor = new ObrisiKursGUI(izabranaValuta);
 		prozor.setLocationRelativeTo(glavniProzor);
 		prozor.setVisible(true);
 	}
 	
 	public static void prikaziIzvrsiZamenuGUI(Valuta izabranaValuta) {
-		IzvrsiZamenuGUI prozor = new IzvrsiZamenuGUI(glavniProzor, izabranaValuta);
+		IzvrsiZamenuGUI prozor = new IzvrsiZamenuGUI(izabranaValuta);
 		prozor.setLocationRelativeTo(glavniProzor);
 		prozor.setVisible(true);
 	}
@@ -113,5 +113,57 @@ public class GUIKontroler {
 
 	public static void obrisiValutu(Valuta valuta) {
 		sistem.obrisiValutu(valuta);
+
+		glavniProzor.prikaziSveValute();
 	}
+
+	public static void dodajKurs(String naziv, String skraceniNaziv, int sifra, String prodajni, 
+			String kupovni, String srednji) {
+
+		Valuta valuta = new Valuta();
+		// Punjenje podataka o valuti
+		valuta.setNaziv(naziv);
+		valuta.setSkraceniNaziv(skraceniNaziv);
+		valuta.setSifra(sifra);
+		valuta.setProdajni(Double.parseDouble(prodajni));
+		valuta.setKupovni(Double.parseDouble(kupovni));
+		valuta.setSrednji(Double.parseDouble(srednji));
+
+		// Dodavanje valute u kursnu listu
+		dodajValutu(valuta);
+
+		// Osvezavanje glavnog prozora
+		glavniProzor.prikaziSveValute();
+		
+	}
+
+	public static void prikaziProzorGreske(Exception e1) {
+		JOptionPane.showMessageDialog(glavniProzor, e1.getMessage(),
+				"Greska", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public static double prodajniValute(Valuta valuta) {
+		return valuta.getProdajni();
+	}
+
+	public static double kupovniValute(Valuta valuta) {
+		return valuta.getKupovni();
+	}
+	
+	public static double srednjiValute(Valuta valuta){
+		return valuta.getSrednji();
+	}
+
+	public static String skraceniNazivValute(Valuta valuta) {
+		return valuta.getSkraceniNaziv();
+	}
+
+	public static String nazivValute(Valuta valuta) {
+		return valuta.getNaziv();
+	}
+
+	public static int sifraValute(Valuta valuta) {
+		return valuta.getSifra();
+	}
+
 }
